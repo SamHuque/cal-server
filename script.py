@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import send_file
 from ics import Calendar, Event
+import os
 
 app = Flask(__name__)
 
@@ -22,4 +23,5 @@ def get_cal():
     return send_file("my.ics", mimetype="text/calendar", as_attachment=True)
 
 
-app.run(host='0.0.0.0', port=3500)
+port = int(os.environ.get("PORT", 5000))
+app.run(debug=True, port=port)
